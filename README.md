@@ -43,5 +43,7 @@ The json file contains multiple
 - A currency
 - price for adults
 - A price for children
+
+
 https://github.com/saltstudy/pgp-test-flightFinder-json/blob/main/data.json
 (Later on, If you want to expand the search possibilities, you could use an external API for flight information (for example, flight-offers-search API), but it gets a bit too complicated this first week!)
