@@ -16,6 +16,7 @@ namespace Populate_Data.Models
         public void Create(FlightRoutes routes)
         {
             _context.Add(routes); 
+            Save();
         }
 
         public void Save()

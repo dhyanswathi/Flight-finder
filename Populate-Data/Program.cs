@@ -11,7 +11,7 @@ IHost host = Host.CreateDefaultBuilder(args)
 {
     var cns = "Data Source=LAPTOP-AC42D6SP\\MSSQLSERVER01;Initial Catalog=FlightFinderDB;Integrated Security=True;encrypt=false";
     services.AddDbContext<FlightFinderDBContext>(options => options.UseSqlServer(cns));
-    services.AddTransient<FlightRepository>();
+    services.AddTransient<IFlightRepository, FlightRepository>();
 })
 .Build();
 
@@ -19,8 +19,8 @@ var path = "C:\\Users\\Mintu\\swathistudy\\pgp\\codeTest\\Flight-finder\\Populat
 
 var items = JsonReader.GetFlightData(path);
 
-var flightRepository = host.Services.GetRequiredService<FlightRepository>();
-//items.ForEach(x => flightRepository.Create(x.route_id, x.departureDestination, x.arrivalDestination));
+var flightRepository = host.Services.GetRequiredService<IFlightRepository>();
+
 foreach (var item in items)
 {
     FlightRoutes flightRoutes = new FlightRoutes();
@@ -47,7 +47,6 @@ foreach (var item in items)
     flightRoutes.Itineraries = itineraries;
     flightRepository.Create(flightRoutes);
 }
-
 
 host.Run();
 
