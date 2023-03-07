@@ -7,6 +7,11 @@ namespace Flight_Finder.Api.Models
 {
     public partial class Itineraries
     {
+        public Itineraries()
+        {
+            Bookings = new HashSet<Bookings>();
+        }
+
         public string FlightId { get; set; }
         public DateTime DepartureAt { get; set; }
         public DateTime ArrivalAt { get; set; }
@@ -17,5 +22,6 @@ namespace Flight_Finder.Api.Models
         public double ChildPrice { get; set; }
 
         public virtual FlightRoutes Route { get; set; }
+        public virtual ICollection<Bookings> Bookings { get; set; }
     }
 }

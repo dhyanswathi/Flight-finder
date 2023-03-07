@@ -15,11 +15,19 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "[dbo].[Bookings]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[FlightRoutes]",
          "ObjectType": 0
       },
       {
          "Name": "[dbo].[Itineraries]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Users]",
          "ObjectType": 0
       }
    ],

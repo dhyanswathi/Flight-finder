@@ -18,11 +18,47 @@ namespace Flight_Finder.Api.Models
         {
         }
 
+        public virtual DbSet<Bookings> Bookings { get; set; }
         public virtual DbSet<FlightRoutes> FlightRoutes { get; set; }
         public virtual DbSet<Itineraries> Itineraries { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Bookings>(entity =>
+            {
+                entity.HasKey(e => e.BookingId)
+                    .HasName("PK__Bookings__73951AEDC834644F");
+
+                entity.Property(e => e.BookingId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.BookingDate).HasColumnType("datetime");
+
+                entity.Property(e => e.FlightId)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Flight)
+                    .WithMany(p => p.Bookings)
+                    .HasForeignKey(d => d.FlightId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Bookings__Flight__4316F928");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Bookings)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Bookings__UserId__440B1D61");
+            });
+
             modelBuilder.Entity<FlightRoutes>(entity =>
             {
                 entity.HasKey(e => e.RouteId)
@@ -69,6 +105,31 @@ namespace Flight_Finder.Api.Models
                     .WithMany(p => p.Itineraries)
                     .HasForeignKey(d => d.RouteId)
                     .HasConstraintName("FK__Itinerari__Route__3E52440B");
+            });
+
+            modelBuilder.Entity<Users>(entity =>
+            {
+                entity.HasKey(e => e.UserId)
+                    .HasName("PK__Users__1788CC4C83B182E1");
+
+                entity.Property(e => e.UserId)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);
