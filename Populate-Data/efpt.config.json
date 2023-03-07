@@ -19,11 +19,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[Itinerary]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[Prices]",
+         "Name": "[dbo].[Itineraries]",
          "ObjectType": 0
       }
    ],

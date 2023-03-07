@@ -9,13 +9,13 @@ namespace Populate_Data.Models
     {
         public FlightRoutes()
         {
-            Itinerary = new HashSet<Itinerary>();
+            Itineraries = new HashSet<Itineraries>();
         }
 
         public string RouteId { get; set; }
         public string DepartureDestination { get; set; }
         public string ArrivalDestination { get; set; }
 
-        public virtual ICollection<Itinerary> Itinerary { get; set; }
+        public virtual ICollection<Itineraries> Itineraries { get; set; }
     }
 }

@@ -19,8 +19,7 @@ namespace Populate_Data.Models
         }
 
         public virtual DbSet<FlightRoutes> FlightRoutes { get; set; }
-        public virtual DbSet<Itinerary> Itinerary { get; set; }
-        public virtual DbSet<Prices> Prices { get; set; }
+        public virtual DbSet<Itineraries> Itineraries { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,16 +43,21 @@ namespace Populate_Data.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Itinerary>(entity =>
+            modelBuilder.Entity<Itineraries>(entity =>
             {
                 entity.HasKey(e => e.FlightId)
-                    .HasName("PK__Itinerar__8A9E14EE7FE7B43F");
+                    .HasName("PK__Itinerar__8A9E14EECCC0B374");
 
                 entity.Property(e => e.FlightId)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ArrivalAt).HasColumnType("datetime");
+
+                entity.Property(e => e.Currency)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.DepartureAt).HasColumnType("datetime");
 
@@ -62,28 +66,9 @@ namespace Populate_Data.Models
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Route)
-                    .WithMany(p => p.Itinerary)
+                    .WithMany(p => p.Itineraries)
                     .HasForeignKey(d => d.RouteId)
-                    .HasConstraintName("FK__Itinerary__Route__398D8EEE");
-            });
-
-            modelBuilder.Entity<Prices>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.Property(e => e.Currency)
-                    .IsRequired()
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.FlightId)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.Flight)
-                    .WithMany()
-                    .HasForeignKey(d => d.FlightId)
-                    .HasConstraintName("FK__Prices__FlightId__3B75D760");
+                    .HasConstraintName("FK__Itinerari__Route__3E52440B");
             });
 
             OnModelCreatingPartial(modelBuilder);

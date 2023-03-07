@@ -5,13 +5,16 @@ using System.Collections.Generic;
 
 namespace Populate_Data.Models
 {
-    public partial class Itinerary
+    public partial class Itineraries
     {
         public string FlightId { get; set; }
         public DateTime DepartureAt { get; set; }
         public DateTime ArrivalAt { get; set; }
         public int AvailableSeats { get; set; }
         public string RouteId { get; set; }
+        public string Currency { get; set; }
+        public double AdultPrice { get; set; }
+        public double ChildPrice { get; set; }
 
         public virtual FlightRoutes Route { get; set; }
     }
