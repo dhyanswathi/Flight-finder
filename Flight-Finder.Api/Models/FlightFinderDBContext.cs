@@ -124,6 +124,11 @@ namespace Flight_Finder.Api.Models
                     .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);
