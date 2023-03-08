@@ -3,7 +3,7 @@
     public interface IFlightRepository
     {
         void Save();
-        IEnumerable<FlightRoutes> GetAllRoutes();
-        FlightRoutes GetById(string id);
+        IEnumerable<FlightRoute> GetAllRoutes();
+        FlightRoute? GetById(string id);
     }
 }

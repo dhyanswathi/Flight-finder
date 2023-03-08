@@ -5,17 +5,17 @@ using System.Collections.Generic;
 
 namespace Flight_Finder.Api.Models
 {
-    public partial class FlightRoutes
+    public partial class FlightRoute
     {
-        public FlightRoutes()
+        public FlightRoute()
         {
-            Itineraries = new HashSet<Itineraries>();
+            Itineraries = new HashSet<Itinerary>();
         }
 
         public string RouteId { get; set; }
         public string DepartureDestination { get; set; }
         public string ArrivalDestination { get; set; }
 
-        public virtual ICollection<Itineraries> Itineraries { get; set; }
+        public virtual ICollection<Itinerary> Itineraries { get; set; }
     }
 }

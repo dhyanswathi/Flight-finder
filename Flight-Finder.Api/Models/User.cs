@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace Flight_Finder.Api.Models
 {
-    public partial class Users
+    public partial class User
     {
-        public Users()
+        public User()
         {
-            Bookings = new HashSet<Bookings>();
+            Bookings = new HashSet<Booking>();
         }
 
         public string UserId { get; set; }
@@ -17,6 +17,6 @@ namespace Flight_Finder.Api.Models
         public string FirstName { get; set; }
         public string Email { get; set; }
 
-        public virtual ICollection<Bookings> Bookings { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
     }
 }

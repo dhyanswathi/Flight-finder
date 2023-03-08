@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Flight_Finder.Api.Models
 {
-    public partial class Bookings
+    public partial class Booking
     {
         public string BookingId { get; set; }
         public DateTime BookingDate { get; set; }
@@ -13,7 +13,7 @@ namespace Flight_Finder.Api.Models
         public string FlightId { get; set; }
         public string UserId { get; set; }
 
-        public virtual Itineraries Flight { get; set; }
-        public virtual Users User { get; set; }
+        public virtual Itinerary Flight { get; set; }
+        public virtual User User { get; set; }
     }
 }

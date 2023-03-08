@@ -18,18 +18,15 @@ namespace Flight_Finder.Api.Models
         {
         }
 
-        public virtual DbSet<Bookings> Bookings { get; set; }
-        public virtual DbSet<FlightRoutes> FlightRoutes { get; set; }
-        public virtual DbSet<Itineraries> Itineraries { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Booking> Bookings { get; set; }
+        public virtual DbSet<FlightRoute> FlightRoutes { get; set; }
+        public virtual DbSet<Itinerary> Itineraries { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Bookings>(entity =>
+            modelBuilder.Entity<Booking>(entity =>
             {
-                entity.HasKey(e => e.BookingId)
-                    .HasName("PK__Bookings__73951AEDC834644F");
-
                 entity.Property(e => e.BookingId)
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -59,7 +56,7 @@ namespace Flight_Finder.Api.Models
                     .HasConstraintName("FK__Bookings__UserId__440B1D61");
             });
 
-            modelBuilder.Entity<FlightRoutes>(entity =>
+            modelBuilder.Entity<FlightRoute>(entity =>
             {
                 entity.HasKey(e => e.RouteId)
                     .HasName("PK__FlightRo__80979B4D9308333F");
@@ -79,7 +76,7 @@ namespace Flight_Finder.Api.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Itineraries>(entity =>
+            modelBuilder.Entity<Itinerary>(entity =>
             {
                 entity.HasKey(e => e.FlightId)
                     .HasName("PK__Itinerar__8A9E14EECCC0B374");
@@ -107,11 +104,8 @@ namespace Flight_Finder.Api.Models
                     .HasConstraintName("FK__Itinerari__Route__3E52440B");
             });
 
-            modelBuilder.Entity<Users>(entity =>
+            modelBuilder.Entity<User>(entity =>
             {
-                entity.HasKey(e => e.UserId)
-                    .HasName("PK__Users__1788CC4C83B182E1");
-
                 entity.Property(e => e.UserId)
                     .HasMaxLength(255)
                     .IsUnicode(false);
