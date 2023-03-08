@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Flight-Finder.Api.props" />
+</Project>
