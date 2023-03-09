@@ -53,7 +53,7 @@ namespace Flight_Finder.Api.Controllers
             }
         }
 
-        [HttpGet("itineraries/{dep}/{arr}")]
+        [HttpGet("itineraries")]
         public IActionResult GetFlights([FromQuery] Filter filter)
         {
             try

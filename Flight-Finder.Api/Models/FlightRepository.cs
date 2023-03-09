@@ -13,11 +13,6 @@ namespace Flight_Finder.Api.Models
         public IEnumerable<Itinerary> GetAllFlights(Filter filter)
         {
             var query = _context.Itineraries.AsQueryable();
-           
-            if (filter == null)
-            {
-                return query.ToList();
-            }
 
             if (filter.DepartureLocation != null && filter.ArrivalLocation != null)
             {
@@ -26,23 +21,23 @@ namespace Flight_Finder.Api.Models
                     .FirstOrDefault();
                 if (route != null)
                 {
-                    return query.Where(x => x.RouteId == route.RouteId).ToList();
+                    query = query.Where(x => x.RouteId == route.RouteId);
                 }
             }
 
             if (filter.TravelDate != null)
             {
-                return query.Where(x => x.DepartureAt >= filter.TravelDate).ToList();
+                query = query.Where(x => x.DepartureAt >= filter.TravelDate);
             }
 
             if (filter.LowPrice != null)
             {
-                return query.Where(x => x.AdultPrice >= filter.LowPrice).ToList();
+                query = query.Where(x => x.AdultPrice >= filter.LowPrice);
             }
 
             if (filter.HighPrice  != null)
             {
-                return query.Where(x => x.AdultPrice  <= filter.HighPrice).ToList();
+                query = query.Where(x => x.AdultPrice  <= filter.HighPrice);
             }
             return query.ToList();
         }
