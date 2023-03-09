@@ -7,6 +7,6 @@
         FlightRoute? GetById(string id);
         IEnumerable<Itinerary> GetAllFlights(string dep, string arr);
 
-        IEnumerable<Itinerary> GetFlightsByRouteId(string routeId);
+        IEnumerable<Itinerary> GetFlightsByTime(DateTime travelDate);
     }
 }

@@ -76,12 +76,12 @@ namespace Flight_Finder.Api.Controllers
             }
         }
 
-        [HttpGet("itineraries/{routeId}")]
-        public IActionResult GetFlightsWithRoute(string routeId)
+        [HttpGet("itineraries")]
+        public IActionResult GetFlightsWithRoute(DateTime time)
         {
             try
             {
-                var result = _repo.GetFlightsByRouteId(routeId).Select(x => new DTO.Itinerary()
+                var result = _repo.GetFlightsByTime(time).Select(x => new DTO.Itinerary()
                 {
                     FlightId = x.FlightId,
                     DepartureAt = x.DepartureAt,

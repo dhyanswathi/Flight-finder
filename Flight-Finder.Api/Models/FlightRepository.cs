@@ -31,9 +31,9 @@ namespace Flight_Finder.Api.Models
             return _context.FlightRoutes.FirstOrDefault(x => x.RouteId == id);
         }
 
-        public IEnumerable<Itinerary> GetFlightsByRouteId(string routeId)
+        public IEnumerable<Itinerary> GetFlightsByTime(DateTime travelDate)
         {
-            return _context.Itineraries.Where(x => x.RouteId == routeId);
+            return _context.Itineraries.Where(x => x.DepartureAt >= travelDate);
         }
 
         public void Save()
