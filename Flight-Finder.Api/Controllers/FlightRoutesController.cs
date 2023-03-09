@@ -1,4 +1,5 @@
-﻿using Flight_Finder.Api.Models;
+﻿using Flight_Finder.Api.DTO;
+using Flight_Finder.Api.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,11 +54,11 @@ namespace Flight_Finder.Api.Controllers
         }
 
         [HttpGet("itineraries/{dep}/{arr}")]
-        public IActionResult GetFlightsFromAToB(string dep, string arr)
+        public IActionResult GetFlights([FromQuery] Filter filter)
         {
             try
             {
-                var result = _repo.GetAllFlights(dep, arr).Select(x => new DTO.Itinerary()
+                var result = _repo.GetAllFlights(filter).Select(x => new DTO.Itinerary()
                 {
                     FlightId = x.FlightId,
                     DepartureAt = x.DepartureAt,
@@ -76,28 +77,7 @@ namespace Flight_Finder.Api.Controllers
             }
         }
 
-        [HttpGet("itineraries")]
-        public IActionResult GetFlightsWithRoute(DateTime time)
-        {
-            try
-            {
-                var result = _repo.GetFlightsByTime(time).Select(x => new DTO.Itinerary()
-                {
-                    FlightId = x.FlightId,
-                    DepartureAt = x.DepartureAt,
-                    ArrivalAt = x.ArrivalAt,
-                    AvailableSeats = x.AvailableSeats,
-                    RouteId = x.RouteId,
-                    Currency = x.Currency,
-                    AdultPrice = x.AdultPrice,
-                    ChildPrice = x.ChildPrice,
-                }); 
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return NotFound(ex.ToString());
-            }
-        }
+       
     }
+
 }
