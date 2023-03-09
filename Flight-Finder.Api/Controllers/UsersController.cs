@@ -17,7 +17,7 @@ namespace Flight_Finder.Api.Controllers
         {
             try
             {
-                var user = _repo.GetById(id);
+                var user = _repo.GetUserById(id);
                 return Ok(user);
             }
             catch (Exception ex) 
@@ -36,7 +36,7 @@ namespace Flight_Finder.Api.Controllers
         [HttpPost("login")]
         public IActionResult LoginUser(UserLogin userLogin)
         {
-            var result = _repo.GetAll();
+            var result = _repo.GetAllUsers();
             var user = result.FirstOrDefault(x => x.Email == userLogin.Email);
 
             if (user != null && user.Password == userLogin.Password)

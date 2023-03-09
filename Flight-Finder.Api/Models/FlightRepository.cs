@@ -58,5 +58,18 @@ namespace Flight_Finder.Api.Models
         {
             _context.SaveChanges();
         }
+
+        public void UpdateSeatAvailability(string id, int seats)
+        {
+            var flight = GetFlightById(id);
+
+            flight.AvailableSeats -= seats;
+            _context.Itineraries.Update(flight);
+        }
+
+        public Itinerary? GetFlightById(string flightId)
+        {
+           return _context.Itineraries.FirstOrDefault(x => x.FlightId == flightId);
+        }
     }
 }

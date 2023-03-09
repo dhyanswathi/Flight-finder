@@ -7,12 +7,12 @@ namespace Flight_Finder.Api.Models
         private readonly FlightFinderDBContext _context;
         public UserRepository(FlightFinderDBContext context) => _context = context;
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<User> GetAllUsers()
         {
             return _context.Users;
         }
 
-        public User? GetById(string id)
+        public User? GetUserById(string id)
         {
             return _context.Users.FirstOrDefault(x => x.UserId == id);
         }
@@ -29,29 +29,29 @@ namespace Flight_Finder.Api.Models
             };
 
             _context.Users.Add(user);
-            Save();
+            SaveUser();
 
             return user;
         }
 
-        public void Save()
+        public void SaveUser()
         {
             _context.SaveChanges();
         }
 
-        public void Delete(string id)
+        public void DeleteUser(string id)
         {
-            var user = GetById(id);
+            var user = GetUserById(id);
             if (user != null)
             {
                 _context.Users.Remove(user);
-                Save();
+                SaveUser();
             }
         }
 
-        public void Update(string id, UserRegister updateUser)
+        public void UpdateUser(string id, UserRegister updateUser)
         {
-            var user = GetById(id);
+            var user = GetUserById(id);
            
             user.FirstName = updateUser.FirstName;
             user.LastName = updateUser.LastName;
@@ -59,7 +59,7 @@ namespace Flight_Finder.Api.Models
             user.Password = updateUser.Password;
 
             _context.Users.Update(user);
-            Save();
+            SaveUser();
         }
     }
 }
