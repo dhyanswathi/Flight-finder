@@ -65,6 +65,7 @@ namespace Flight_Finder.Api.Models
 
             flight.AvailableSeats -= seats;
             _context.Itineraries.Update(flight);
+            Save();
         }
 
         public Itinerary? GetFlightById(string flightId)
