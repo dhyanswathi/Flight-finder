@@ -5,5 +5,8 @@
         void Save();
         IEnumerable<FlightRoute> GetAllRoutes();
         FlightRoute? GetById(string id);
+        IEnumerable<Itinerary> GetAllFlights(string dep, string arr);
+
+        IEnumerable<Itinerary> GetFlightsByRouteId(string routeId);
     }
 }

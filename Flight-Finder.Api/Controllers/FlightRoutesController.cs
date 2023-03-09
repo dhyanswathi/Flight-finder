@@ -40,5 +40,33 @@ namespace Flight_Finder.Api.Controllers
                 return NotFound(ex.ToString());
             }
         }
+
+        [HttpGet("itineraries/{dep}/{arr}")]
+        public IActionResult GetFlightsFromAToB(string dep, string arr)
+        {
+            try
+            {
+                var result = _repo.GetAllFlights(dep, arr);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.ToString());
+            }
+        }
+
+        [HttpGet("itineraries/{routeId}")]
+        public IActionResult GetFlightsWithRoute(string routeId)
+        {
+            try
+            {
+                var result = _repo.GetFlightsByRouteId(routeId);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.ToString());
+            }
+        }
     }
 }
