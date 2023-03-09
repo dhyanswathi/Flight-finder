@@ -12,6 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSqlServer<FlightFinderDBContext>(builder.Configuration.GetConnectionString("DefaultConnection"));
 
 builder.Services.AddTransient<IFlightRepository, FlightRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 

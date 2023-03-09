@@ -4,10 +4,11 @@ namespace Flight_Finder.Api.Models
 {
     public interface IUserRepository
     {
-        User GetById(string id);
+        User? GetById(string id);
         IEnumerable<User> GetAll();
-        void Register (UserRegister user);
+        User Register (UserRegister registerUser);
         void Delete(string id);
-        void Update (UserRegister user);
+        void Update (string id, UserRegister updateUser);
+        void Save();
     }
 }
