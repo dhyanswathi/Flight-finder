@@ -12,7 +12,7 @@ namespace Flight_Finder.Api.Controllers
         private readonly IUserRepository _repo;
         public UsersController(IUserRepository repo) => _repo = repo;
 
-        [HttpGet("{id}")]
+        [HttpGet]
         public IActionResult GetUser(string id) 
         {
             try
