@@ -16,7 +16,12 @@ namespace Flight_Finder.Api.Controllers
         {
             try
             {
-                var result = _repo.GetAllRoutes();
+                var result = _repo.GetAllRoutes().Select(x => new DTO.FlightRoute()
+                {
+                    RouteId = x.RouteId,
+                    DepartureDestination = x.DepartureDestination,
+                    ArrivalDestination = x.ArrivalDestination
+                }).ToList();
 
                 return Ok(result);
             }
@@ -32,8 +37,14 @@ namespace Flight_Finder.Api.Controllers
             try
             {
                 var route = _repo.GetById(id);
+                var flightRoute = new DTO.FlightRoute()
+                {
+                    RouteId = route.RouteId,
+                    DepartureDestination = route.DepartureDestination,
+                    ArrivalDestination = route.ArrivalDestination
+                };
 
-                return Ok(route);
+                return Ok(flightRoute);
             }
             catch (Exception ex)
             {
@@ -46,7 +57,17 @@ namespace Flight_Finder.Api.Controllers
         {
             try
             {
-                var result = _repo.GetAllFlights(dep, arr);
+                var result = _repo.GetAllFlights(dep, arr).Select(x => new DTO.Itinerary()
+                {
+                    FlightId = x.FlightId,
+                    DepartureAt = x.DepartureAt,
+                    ArrivalAt = x.ArrivalAt,
+                    AvailableSeats = x.AvailableSeats,
+                    RouteId = x.RouteId,
+                    Currency = x.Currency,
+                    AdultPrice = x.AdultPrice,
+                    ChildPrice = x.ChildPrice,
+                });
                 return Ok(result);
             }
             catch (Exception ex)
@@ -60,7 +81,17 @@ namespace Flight_Finder.Api.Controllers
         {
             try
             {
-                var result = _repo.GetFlightsByRouteId(routeId);
+                var result = _repo.GetFlightsByRouteId(routeId).Select(x => new DTO.Itinerary()
+                {
+                    FlightId = x.FlightId,
+                    DepartureAt = x.DepartureAt,
+                    ArrivalAt = x.ArrivalAt,
+                    AvailableSeats = x.AvailableSeats,
+                    RouteId = x.RouteId,
+                    Currency = x.Currency,
+                    AdultPrice = x.AdultPrice,
+                    ChildPrice = x.ChildPrice,
+                }); 
                 return Ok(result);
             }
             catch (Exception ex)
