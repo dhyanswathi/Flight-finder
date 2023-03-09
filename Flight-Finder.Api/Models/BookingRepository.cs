@@ -47,7 +47,7 @@ namespace Flight_Finder.Api.Models
 
         public void SaveBooking()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
 
         public void UpdateBooking(string bookingId, BookingRequest request)
