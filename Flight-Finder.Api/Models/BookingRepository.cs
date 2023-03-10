@@ -1,4 +1,5 @@
-﻿using Flight_Finder.Api.DTO;
+﻿using Azure.Core;
+using Flight_Finder.Api.DTO;
 
 namespace Flight_Finder.Api.Models
 {
@@ -51,9 +52,22 @@ namespace Flight_Finder.Api.Models
         public void DeleteBooking(string bookingId)
         {
             var booking = GetBooking(bookingId);
+
+            int noOfSeats = 0;
+
             if (booking != null)
             {
+                if (booking.Child == null)
+                {
+                    noOfSeats = booking.Adults;
+                }
+                else
+                {
+                    noOfSeats = booking.Adults + booking.Child.Value;
+                }
+
                 _context.Bookings.Remove(booking);
+                _flightRepo.UpdateSeatAfterCancellation(booking.FlightId, noOfSeats);
                 SaveBooking();
             }
         }

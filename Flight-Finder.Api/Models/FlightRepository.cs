@@ -91,5 +91,14 @@ namespace Flight_Finder.Api.Models
 
             return adultPrice + childPrice.Value;
         }
+
+        public void UpdateSeatAfterCancellation(string id, int seats)
+        {
+            var flight = GetFlightById(id);
+
+            flight.AvailableSeats += seats;
+            _context.Itineraries.Update(flight);
+            Save();
+        }
     }
 }
