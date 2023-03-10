@@ -58,6 +58,16 @@ namespace Flight_Finder.Api.Models
         {
             _context.SaveChanges();
         }
+        public bool SeatsAvailable(string id, int seats)
+        {
+            var flight = GetFlightById(id);
+            if (flight == null)
+            {
+                return false;
+            }
+
+            return flight.AvailableSeats >= seats;
+        }
 
         public void UpdateSeatAvailability(string id, int seats)
         {

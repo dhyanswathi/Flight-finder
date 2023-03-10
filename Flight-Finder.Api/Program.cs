@@ -13,6 +13,7 @@ builder.Services.AddSqlServer<FlightFinderDBContext>(builder.Configuration.GetCo
 
 builder.Services.AddTransient<IFlightRepository, FlightRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IBookingRepository, BookingRepository>();
 
 var app = builder.Build();
 

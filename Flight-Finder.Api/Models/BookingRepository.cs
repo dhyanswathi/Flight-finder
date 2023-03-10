@@ -14,20 +14,26 @@ namespace Flight_Finder.Api.Models
 
         public Booking CreateBooking(BookingRequest request)
         {
-            var booking = new Booking()
+            if (_flightRepo.SeatsAvailable(request.FlightId, request.NumberOfSeats))
             {
-                BookingId = Guid.NewGuid().ToString(),
-                BookingDate = DateTime.Now,
-                NumberOfSeats = request.NumberOfSeats,
-                FlightId = request.FlightId,
-                UserId = request.UserId
-            };
-            _context.Bookings.Add(booking);
-            SaveBooking();
+                var booking = new Booking()
+                {
+                    BookingId = Guid.NewGuid().ToString(),
+                    BookingDate = DateTime.Now,
+                    NumberOfSeats = request.NumberOfSeats,
+                    FlightId = request.FlightId,
+                    UserId = request.UserId
+                };
+                _context.Bookings.Add(booking);
+                SaveBooking();
 
-            _flightRepo.UpdateSeatAvailability(request.FlightId, request.NumberOfSeats);
-
-            return booking;
+                _flightRepo.UpdateSeatAvailability(request.FlightId, request.NumberOfSeats);
+                return booking;
+            }
+            else
+            {
+                throw new Exception("Not enough seating available. Try another flight");
+            }
         }
 
         public void DeleteBooking(string bookingId)

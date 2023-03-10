@@ -9,6 +9,7 @@ namespace Flight_Finder.Api.Models
         FlightRoute? GetById(string id);
         Itinerary? GetFlightById(string id);
         IEnumerable<Itinerary> GetAllFlights(Filter filter);
+        bool SeatsAvailable(string id, int seats);
         void UpdateSeatAvailability(string id, int seats);
     }
 }
