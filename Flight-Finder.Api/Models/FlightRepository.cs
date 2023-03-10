@@ -82,5 +82,14 @@ namespace Flight_Finder.Api.Models
         {
            return _context.Itineraries.FirstOrDefault(x => x.FlightId == flightId);
         }
+
+        public double GetPrice(string flightId, int adult, int? child)
+        {
+            var flight = GetFlightById(flightId);
+            var adultPrice = flight.AdultPrice * adult;
+            var childPrice = flight.ChildPrice * child;
+
+            return adultPrice + childPrice.Value;
+        }
     }
 }

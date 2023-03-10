@@ -14,20 +14,32 @@ namespace Flight_Finder.Api.Models
 
         public Booking CreateBooking(BookingRequest request)
         {
-            if (_flightRepo.SeatsAvailable(request.FlightId, request.NumberOfSeats))
+            int noOfSeats = 0;
+            if (request.Child == null)
+            {
+                noOfSeats = request.Adults;
+            }
+            else
+            {
+                noOfSeats = request.Adults + request.Child.Value;
+            }
+             
+            if (_flightRepo.SeatsAvailable(request.FlightId, noOfSeats))
             {
                 var booking = new Booking()
                 {
                     BookingId = Guid.NewGuid().ToString(),
                     BookingDate = DateTime.Now,
-                    NumberOfSeats = request.NumberOfSeats,
+                    Adults = request.Adults,
+                    Child = request.Child,
                     FlightId = request.FlightId,
-                    UserId = request.UserId
+                    UserId = request.UserId,
+                    Price = _flightRepo.GetPrice(request.FlightId, request.Adults, request.Child.Value)
                 };
                 _context.Bookings.Add(booking);
                 SaveBooking();
 
-                _flightRepo.UpdateSeatAvailability(request.FlightId, request.NumberOfSeats);
+                _flightRepo.UpdateSeatAvailability(request.FlightId, noOfSeats);
                 return booking;
             }
             else

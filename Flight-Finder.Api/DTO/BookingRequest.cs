@@ -2,7 +2,8 @@
 {
     public class BookingRequest
     {
-        public int NumberOfSeats { get; set; }
+        public int Adults { get; set; }
+        public int? Child { get; set; }
         public string FlightId { get; set; }
         public string UserId { get; set; }
     }
