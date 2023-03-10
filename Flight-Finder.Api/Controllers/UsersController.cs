@@ -1,5 +1,6 @@
 ﻿using Flight_Finder.Api.DTO;
 using Flight_Finder.Api.Models;
+using Flight_Finder.Api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +11,14 @@ namespace Flight_Finder.Api.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _repo;
-        public UsersController(IUserRepository repo) => _repo = repo;
+        private readonly ITokenManager _tokenManager;
+        public UsersController(IUserRepository repo, ITokenManager tokenManager)
+        {
+            _repo = repo;
+            _tokenManager = tokenManager;
+        }
 
-        [HttpGet]
+            [HttpGet]
         public IActionResult GetUser(string id) 
         {
             try
@@ -41,12 +47,19 @@ namespace Flight_Finder.Api.Controllers
 
             if (user != null && user.Password == userLogin.Password)
             {
+                var token = _tokenManager.Authenticate(userLogin.Email, userLogin.Password);
+                if (token == null)
+                {
+                    return Unauthorized();
+                }
+
                 var loginUser = new LoginResponse
                 {
                     UserId = user.UserId, 
                     Email = user.Email,
                     FirstName = user.FirstName, 
-                    LastName = user.LastName
+                    LastName = user.LastName,
+                    Token = token
                 };
                 return Ok(loginUser);
             }

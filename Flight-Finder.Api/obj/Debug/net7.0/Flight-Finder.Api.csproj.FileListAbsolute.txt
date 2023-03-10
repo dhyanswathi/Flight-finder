@@ -70,3 +70,4 @@ C:\Users\Mintu\swathistudy\pgp\codeTest\Flight-finder\Flight-Finder.Api\obj\Debu
 C:\Users\Mintu\swathistudy\pgp\codeTest\Flight-finder\Flight-Finder.Api\obj\Debug\net7.0\Flight-Finder.Api.pdb
 C:\Users\Mintu\swathistudy\pgp\codeTest\Flight-finder\Flight-Finder.Api\obj\Debug\net7.0\Flight-Finder.Api.genruntimeconfig.cache
 C:\Users\Mintu\swathistudy\pgp\codeTest\Flight-finder\Flight-Finder.Api\obj\Debug\net7.0\ref\Flight-Finder.Api.dll
+C:\Users\Mintu\swathistudy\pgp\codeTest\Flight-finder\Flight-Finder.Api\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
