@@ -50,27 +50,27 @@ namespace Flight_Finder.Api.Models
 
         public void DeleteBooking(string bookingId)
         {
-            throw new NotImplementedException();
+            var booking = GetBooking(bookingId);
+            if (booking != null)
+            {
+                _context.Bookings.Remove(booking);
+                SaveBooking();
+            }
         }
 
         public IEnumerable<Booking> GetAllBookings()
         {
-            throw new NotImplementedException();
+            return _context.Bookings;
         }
 
-        public Booking GetBooking(string bookingId)
+        public Booking? GetBooking(string bookingId)
         {
-            throw new NotImplementedException();
+            return _context.Bookings.FirstOrDefault(x => x.BookingId == bookingId);
         }
 
         public void SaveBooking()
         {
             _context.SaveChanges();
-        }
-
-        public void UpdateBooking(string bookingId, BookingRequest request)
-        {
-            throw new NotImplementedException();
         }
     }
 }

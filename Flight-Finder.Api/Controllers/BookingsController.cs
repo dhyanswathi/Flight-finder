@@ -9,8 +9,8 @@ namespace Flight_Finder.Api.Controllers
     [ApiController]
     public class BookingsController : ControllerBase
     {
-        private readonly BookingRepository _bookingRepo;
-        public BookingsController(BookingRepository bookingRepo) 
+        private readonly IBookingRepository _bookingRepo;
+        public BookingsController(IBookingRepository bookingRepo) 
         {
             _bookingRepo = bookingRepo;
         }
@@ -18,8 +18,26 @@ namespace Flight_Finder.Api.Controllers
         [HttpPost]
         public IActionResult AddBooking(BookingRequest request)
         {
-            var result = _bookingRepo.CreateBooking(request);
-            return Created("", result);
+            try
+            {
+                var result = _bookingRepo.CreateBooking(request);
+                var booking = new DTO.Booking()
+                {
+                    BookingId = result.BookingId,
+                    BookingDate = result.BookingDate,
+                    FlightId = result.FlightId,
+                    Adults = result.Adults,
+                    Child = result.Child,
+                    Price = result.Price,
+                    UserId = result.UserId
+                };
+                return Created("", booking);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.ToString());
+            }
+            
         }
 
     }
