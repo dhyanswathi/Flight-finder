@@ -77,7 +77,44 @@ namespace Flight_Finder.Api.Controllers
             }
         }
 
-       
+        [HttpGet("{dep}/{arr}")]
+       public IActionResult GetConnectionFlights(string dep, string arr)
+        {
+            try
+            {
+                var result = _repo.GetConnectionFlights(dep, arr).Select(x => new DTO.Itinerary[2]
+                {
+                    new DTO.Itinerary()
+                    {
+                        FlightId = x[0].FlightId,
+                    DepartureAt =  x[0].DepartureAt,
+                    ArrivalAt =  x[0].ArrivalAt,
+                    AvailableSeats =  x[0].AvailableSeats,
+                    RouteId =  x[0].RouteId,
+                    Currency =  x[0].Currency,
+                    AdultPrice =  x[0].AdultPrice,
+                    ChildPrice =  x[0].ChildPrice,
+                    },
+                    new DTO.Itinerary()
+                    {
+                        FlightId =  x[1].FlightId,
+                    DepartureAt = x[1].DepartureAt,
+                    ArrivalAt =  x[1].ArrivalAt,
+                    AvailableSeats = x[1].AvailableSeats,
+                    RouteId = x[1].RouteId,
+                    Currency = x[1].Currency,
+                    AdultPrice = x[1].AdultPrice,
+                    ChildPrice = x[1].ChildPrice,
+                    }
+                });
+                return Ok(result);
+            }
+            catch (Exception ex)
+            { 
+                return NotFound(ex.ToString());
+            }
+
+        }
     }
 
 }

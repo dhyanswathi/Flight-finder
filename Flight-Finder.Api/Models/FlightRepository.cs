@@ -100,5 +100,46 @@ namespace Flight_Finder.Api.Models
             _context.Itineraries.Update(flight);
             Save();
         }
+
+        public IEnumerable<Itinerary[]> GetConnectionFlights(string dep, string arr)
+        {
+            var routes = new List<string[]>();
+            var trips = new List<Itinerary[]>();
+
+            var departure = _context.FlightRoutes.Where(x => x.DepartureDestination == dep).ToList();
+            var arrival = _context.FlightRoutes.Where(x => x.ArrivalDestination == arr).ToList();
+
+            foreach (var item in departure)
+            {
+                var connect = item.ArrivalDestination;
+                foreach(var point in arrival)
+                {
+                    if (point.DepartureDestination == connect)
+                    {
+                        routes.Add(new string[] { item.RouteId, point.RouteId });
+                    }
+                }
+            }
+
+            foreach (var item in routes)
+            {
+                var flightA = _context.Itineraries.Where(x => x.RouteId == item[0]).ToList();
+                var flightB = _context.Itineraries.Where(x => x.RouteId == item[1]).ToList();
+
+                foreach (var flight in flightA)
+                {
+                    var arrivalTime = flight.ArrivalAt;
+
+                    foreach (var flight2 in flightB)
+                    {
+                        if (flight2.DepartureAt > arrivalTime)
+                        {
+                            trips.Add(new Itinerary[] { flight, flight2 });
+                        }
+                    }
+                }
+            }
+            return trips;
+        }
     }
 }
