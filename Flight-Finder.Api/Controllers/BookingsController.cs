@@ -60,5 +60,20 @@ namespace Flight_Finder.Api.Controllers
             _bookingRepo.DeleteBooking(id);
             return NoContent();
         }
+
+        [HttpGet("user/{userId}")]
+        public IActionResult GetUserBookings(string userId)
+        {
+            try
+            {
+                var result = _bookingRepo.GetBookingsForUser(userId);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.ToString());
+            }
+            
+        }
     }
 }

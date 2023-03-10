@@ -6,6 +6,7 @@ namespace Flight_Finder.Api.Models
     {
         IEnumerable<Booking> GetAllBookings();
         Booking? GetBooking(string bookingId);
+        IEnumerable<Booking?> GetBookingsForUser(string userId);
         Booking CreateBooking(BookingRequest request);
         void DeleteBooking(string bookingId);
         void SaveBooking();

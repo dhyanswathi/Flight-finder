@@ -82,6 +82,11 @@ namespace Flight_Finder.Api.Models
             return _context.Bookings.FirstOrDefault(x => x.BookingId == bookingId);
         }
 
+        public IEnumerable<Booking> GetBookingsForUser(string userId)
+        {
+            return _context.Bookings.Where(x => x.UserId == userId);
+        }
+
         public void SaveBooking()
         {
             _context.SaveChanges();
