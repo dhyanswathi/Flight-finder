@@ -33,6 +33,8 @@ namespace Flight_Finder.Api.Models
 
                 entity.Property(e => e.BookingDate).HasColumnType("datetime");
 
+                entity.Property(e => e.Child).HasColumnName("child");
+
                 entity.Property(e => e.FlightId)
                     .IsRequired()
                     .HasMaxLength(255)

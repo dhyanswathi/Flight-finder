@@ -9,9 +9,11 @@ namespace Flight_Finder.Api.Models
     {
         public string BookingId { get; set; }
         public DateTime BookingDate { get; set; }
-        public int NumberOfSeats { get; set; }
         public string FlightId { get; set; }
         public string UserId { get; set; }
+        public double Price { get; set; }
+        public int Adults { get; set; }
+        public int? Child { get; set; }
 
         public virtual Itinerary Flight { get; set; }
         public virtual User User { get; set; }
