@@ -13,6 +13,5 @@ namespace Flight_Finder.Api.Models
         bool SeatsAvailable(string id, int seats);
         void UpdateSeatAvailability(string id, int seats);
         void UpdateSeatAfterCancellation(string id, int seats);
-        double GetPrice(string flightId, int adult, int? child);
     }
 }
