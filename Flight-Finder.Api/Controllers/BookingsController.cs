@@ -10,7 +10,7 @@ namespace Flight_Finder.Api.Controllers
     public class BookingsController : ControllerBase
     {
         private readonly IBookingRepository _bookingRepo;
-        public BookingsController(IBookingRepository bookingRepo) 
+        public BookingsController(IBookingRepository bookingRepo)
         {
             _bookingRepo = bookingRepo;
         }
@@ -35,10 +35,30 @@ namespace Flight_Finder.Api.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound(ex.ToString());
+                return BadRequest(ex.ToString());
             }
-            
+
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetBooking(string id)
+        {
+            try
+            {
+                var result = _bookingRepo.GetBooking(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.ToString());
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult CancelBooking(string  id)
+        {
+            _bookingRepo.DeleteBooking(id);
+            return NoContent();
+        }
     }
 }
